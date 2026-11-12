@@ -162,6 +162,10 @@
                         </div>
                     </div>
                     <div class="flex items-center gap-2 lg:hidden">
+                        <button onclick="openCoachModal()" class="px-2.5 py-1.5 bg-purple-600/30 border border-purple-500/50 text-purple-200 rounded-lg text-xs font-extrabold flex items-center gap-1.5 shadow-md shadow-purple-500/20">
+                            <img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?auto=format&fit=crop&w=100&q=80" alt="Coach IA" class="w-4 h-4 rounded-full object-cover border border-purple-400">
+                            <span>Coach IA</span>
+                        </button>
                         <button onclick="openProfileModal()" class="px-2.5 py-1.5 bg-slate-900 border border-slate-700 text-cyan-400 rounded-lg text-xs font-bold">
                             <i class="fa-solid fa-id-card"></i>
                         </button>
@@ -175,21 +179,22 @@
                 <div class="flex flex-wrap items-center gap-2 bg-slate-900/90 p-2 rounded-xl border border-slate-800 text-xs">
                     <div class="px-3 py-1 cursor-pointer hover:bg-slate-800 rounded-lg transition" onclick="openProfileModal()">
                         <span class="block text-slate-500 text-[9px] uppercase font-bold tracking-wider">Athlète</span>
-                        <span id="header-user-name" class="font-extrabold text-cyan-400">Athlète (1m94 | 84kg)</span>
+                        <span id="header-user-name" class="font-extrabold text-cyan-400">Nouvel Athlète</span>
                     </div>
                     <div class="px-3 py-1 border-l border-slate-800">
                         <span class="block text-slate-500 text-[9px] uppercase font-bold tracking-wider">Cible Calories</span>
-                        <span id="header-user-kcal" class="font-extrabold text-emerald-400 font-mono-num">3 120 Kcal</span>
+                        <span id="header-user-kcal" class="font-extrabold text-emerald-400 font-mono-num">-- Kcal</span>
                     </div>
                     <div class="px-3 py-1 border-l border-slate-800">
                         <span class="block text-slate-500 text-[9px] uppercase font-bold tracking-wider">Objectif Protéines</span>
-                        <span id="header-user-prot" class="font-extrabold text-purple-400 font-mono-num">165 g</span>
+                        <span id="header-user-prot" class="font-extrabold text-purple-400 font-mono-num">-- g</span>
                     </div>
                     <button onclick="openProfileModal()" class="hidden lg:flex px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-cyan-300 rounded-lg text-xs font-bold border border-slate-700 transition items-center gap-1.5">
                         <i class="fa-solid fa-sliders text-cyan-400"></i> Profil & Santé
                     </button>
-                    <button onclick="openCoachModal()" class="px-3 py-1.5 bg-purple-600/20 hover:bg-purple-600/30 text-purple-300 rounded-lg text-xs font-bold border border-purple-500/30 transition flex items-center gap-1.5">
-                        <i class="fa-solid fa-robot text-purple-400"></i> <span class="hidden sm:inline">Coach IA</span>
+                    <button onclick="openCoachModal()" class="hidden sm:flex px-3 py-1.5 bg-gradient-to-r from-purple-600/30 to-cyan-600/20 hover:from-purple-600/40 hover:to-cyan-600/30 text-purple-200 rounded-lg text-xs font-extrabold border border-purple-500/40 transition items-center gap-2 shadow-lg shadow-purple-500/10">
+                        <img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?auto=format&fit=crop&w=100&q=80" alt="Coach IA" class="w-5 h-5 rounded-full object-cover border border-purple-400">
+                        <span>Assistant Coach IA</span>
                     </button>
                     <button onclick="toggleLiveWorkoutModal()" class="hidden lg:flex px-4 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg text-xs font-black transition items-center gap-1.5 shadow-lg shadow-emerald-600/20">
                         <i class="fa-solid fa-circle-play"></i> Lancer la Séance
@@ -199,56 +204,133 @@
         </div>
     </header>
 
-    <!-- TOAST NOTIFICATION CONTAINER -->
-    <div id="toast-container" class="fixed bottom-4 right-4 z-50 flex flex-col gap-2 pointer-events-none"></div>
+    <!-- FLOATING COACH IA WIDGET (ULTRA VISIBLE SUR MOBILE & DESKTOP) -->
+    <button onclick="openCoachModal()" class="fixed bottom-5 right-4 sm:right-6 z-40 group flex items-center gap-2.5 bg-gradient-to-r from-purple-700 via-indigo-700 to-cyan-700 hover:from-purple-600 hover:to-cyan-600 text-white p-2 pr-4 rounded-full shadow-2xl shadow-purple-600/40 border border-purple-400/50 transition-all duration-300 hover:scale-105 active:scale-95">
+        <div class="relative">
+            <img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?auto=format&fit=crop&w=120&q=80" alt="Coach IA" class="w-11 h-11 rounded-full object-cover border-2 border-white shadow-md">
+            <span class="absolute bottom-0 right-0 w-3 h-3 bg-emerald-400 border-2 border-slate-900 rounded-full animate-ping"></span>
+            <span class="absolute bottom-0 right-0 w-3 h-3 bg-emerald-400 border-2 border-slate-900 rounded-full"></span>
+        </div>
+        <div class="text-left">
+            <span class="block text-[9px] uppercase tracking-wider font-extrabold text-cyan-200 leading-none">En ligne • Tutos</span>
+            <span class="font-black text-xs sm:text-sm tracking-tight flex items-center gap-1">
+                Coach IA <i class="fa-solid fa-comment-dots text-cyan-300 text-xs"></i>
+            </span>
+        </div>
+    </button>
 
-    <!-- STICKY REST TIMER BAR -->
-    <div id="timer-bar" class="bg-slate-950/95 backdrop-blur border-b border-cyan-500/20 px-4 py-2 sticky top-[65px] sm:top-[69px] z-20 shadow-xl">
-        <div class="max-w-7xl mx-auto flex items-center justify-between text-sm">
-            <div class="flex items-center gap-3">
-                <div class="flex items-center justify-center w-8 h-8 rounded-lg bg-cyan-500/10 text-cyan-400 border border-cyan-500/30">
-                    <i class="fa-solid fa-stopwatch animate-pulse"></i>
+    <!-- ÉCRAN D'ACCUEIL / ONBOARDING OBLIGATOIRE (CONFIDENTIALITÉ COLLÈGUES) -->
+    <div id="onboarding-overlay" class="fixed inset-0 bg-slate-950/95 backdrop-blur-xl z-50 flex items-center justify-center p-4 overflow-y-auto hidden">
+        <div class="bg-slate-900 border border-cyan-500/40 w-full max-w-xl rounded-3xl shadow-2xl overflow-hidden my-auto">
+            <div class="p-5 sm:p-6 bg-gradient-to-r from-slate-900 via-cyan-950/40 to-purple-950/40 border-b border-slate-800 flex items-center gap-4">
+                <div class="w-12 h-12 rounded-2xl bg-cyan-500/10 border border-cyan-500/40 flex items-center justify-center text-cyan-400 text-xl flex-shrink-0">
+                    <i class="fa-solid fa-user-shield"></i>
                 </div>
                 <div>
-                    <span class="text-[9px] uppercase tracking-wider text-slate-400 block font-bold" id="timer-label">Chronomètre de Repos</span>
-                    <span id="timer-display" class="font-mono-num text-lg font-black text-cyan-400">00:00</span>
+                    <span class="text-[10px] uppercase tracking-widest font-extrabold text-cyan-400 block">Espace Personnel Sécurisé</span>
+                    <h2 class="text-lg sm:text-xl font-black text-white">Bienvenue sur MASS BUILDER PRO 4D</h2>
+                    <p class="text-xs text-slate-400 mt-0.5">Renseignez vos informations personnelles pour calibrer vos calories et ouvrir votre programme. Vos données restent privées sur votre appareil.</p>
                 </div>
             </div>
-            <div class="flex items-center gap-1.5 sm:gap-2">
-                <button onclick="startTimer(75, 'Repos Inter-Série (Isolation)')" class="px-2.5 py-1 bg-slate-900 hover:bg-slate-800 text-slate-200 rounded-lg text-xs font-bold border border-slate-800 transition">1m15</button>
-                <button onclick="startTimer(90, 'Repos Inter-Série (Polyarticulaire)')" class="px-2.5 py-1 bg-slate-900 hover:bg-slate-800 text-slate-200 rounded-lg text-xs font-bold border border-slate-800 transition">1m30</button>
-                <button onclick="startTimer(120, 'Repos Inter-Exercice')" class="px-2.5 py-1 bg-slate-900 hover:bg-slate-800 text-slate-200 rounded-lg text-xs font-bold border border-slate-800 transition">2m00</button>
-                <button onclick="startTimer(150, 'Repos Charge Lourde')" class="px-2.5 py-1 bg-slate-900 hover:bg-slate-800 text-slate-200 rounded-lg text-xs font-bold border border-slate-800 transition">2m30</button>
-                <button onclick="stopTimer()" class="px-2.5 py-1 bg-rose-500/20 hover:bg-rose-500/30 text-rose-400 rounded-lg text-xs font-bold border border-rose-500/30 transition ml-1"><i class="fa-solid fa-pause"></i></button>
-            </div>
+            <form onsubmit="submitOnboardingProfile(event)" class="p-5 sm:p-6 space-y-4 text-xs">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-slate-300 mb-1 font-bold">Prénom ou Pseudo *</label>
+                        <input type="text" id="onb-name" required placeholder="Ex: Moussa, Alex..." class="w-full bg-slate-950 border border-slate-700 focus:border-cyan-500 rounded-xl p-2.5 text-white outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-slate-300 mb-1 font-bold">Sexe *</label>
+                        <select id="onb-sex" class="w-full bg-slate-950 border border-slate-700 focus:border-cyan-500 rounded-xl p-2.5 text-white outline-none">
+                            <option value="Masculin">Masculin</option>
+                            <option value="Féminin">Féminin</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-slate-300 mb-1 font-bold">Âge (ans) *</label>
+                        <input type="number" id="onb-age" required min="15" max="85" placeholder="Ex: 28" class="w-full bg-slate-950 border border-slate-700 focus:border-cyan-500 rounded-xl p-2.5 text-white font-mono-num outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-slate-300 mb-1 font-bold">Taille (cm) *</label>
+                        <input type="number" id="onb-height" required min="130" max="230" placeholder="Ex: 180" class="w-full bg-slate-950 border border-slate-700 focus:border-cyan-500 rounded-xl p-2.5 text-white font-mono-num outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-slate-300 mb-1 font-bold">Poids actuel (kg) *</label>
+                        <input type="number" step="0.1" id="onb-weight" required min="35" max="220" placeholder="Ex: 75" class="w-full bg-slate-950 border border-slate-700 focus:border-cyan-500 rounded-xl p-2.5 text-white font-mono-num outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-slate-300 mb-1 font-bold">Objectif Principal *</label>
+                        <select id="onb-goal" class="w-full bg-slate-950 border border-slate-700 focus:border-cyan-500 rounded-xl p-2.5 text-white outline-none">
+                            <option value="bulk">Prise de Masse & Volume Bras</option>
+                            <option value="maintain">Maintien & Dessin Musculaire</option>
+                            <option value="cut">Sèche & Perte de Gras</option>
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-slate-300 mb-1 font-bold">Contraintes articulaires ou santé (Optionnel)</label>
+                    <input type="text" id="onb-health" placeholder="Ex: Aucune, ou sensibilité poignet/genou/dos..." class="w-full bg-slate-950 border border-slate-700 focus:border-cyan-500 rounded-xl p-2.5 text-white outline-none">
+                </div>
+                <div class="pt-2">
+                    <button type="submit" class="w-full py-3 bg-gradient-to-r from-cyan-600 to-emerald-600 hover:from-cyan-500 hover:to-emerald-500 text-white font-black rounded-xl text-sm shadow-lg shadow-cyan-600/25 transition flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-unlock-keyhole"></i> Accéder à Mon Programme Personnalisé
+                    </button>
+                </div>
+            </form>
         </div>
     </div>
 
-    <!-- MAIN BODY CONTAINER -->
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 flex-grow w-full">
+    <!-- TOAST NOTIFICATION CONTAINER -->
+    <div id="toast-container" class="fixed bottom-20 right-4 z-50 flex flex-col gap-2 pointer-events-none"></div>
 
-        <!-- NAV TABS BAR -->
-        <div class="flex overflow-x-auto gap-2 pb-2 mb-6 border-b border-slate-800 custom-scrollbar">
-            <button onclick="switchTab('day1')" id="tab-day1" class="tab-btn px-4 py-2.5 rounded-xl font-extrabold text-xs sm:text-sm whitespace-nowrap transition-all flex items-center gap-2 bg-cyan-600 text-white shadow-lg shadow-cyan-600/20">
-                <i class="fa-solid fa-calendar-day"></i> Lundi : UPPER A
+    <!-- MAIN CONTENT CONTAINER -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 space-y-6 flex-grow">
+
+        <!-- REST TIMER BAR -->
+        <div id="timer-bar" class="bg-slate-900/95 border border-cyan-500/30 rounded-2xl p-3.5 flex flex-wrap items-center justify-between gap-3 shadow-lg">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400">
+                    <i class="fa-solid fa-stopwatch text-lg"></i>
+                </div>
+                <div>
+                    <span id="timer-label" class="text-[10px] uppercase tracking-wider font-extrabold text-slate-400 block">Chronomètre de Repos</span>
+                    <span id="timer-display" class="font-mono-num text-2xl font-black text-white">00:00</span>
+                </div>
+            </div>
+            <div class="flex flex-wrap items-center gap-2">
+                <button onclick="startTimer(60, 'Repos Court (Isolation)')" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-cyan-300 rounded-lg text-xs font-mono-num font-bold border border-slate-700 transition">1m00</button>
+                <button onclick="startTimer(90, 'Repos Standard (Hypertrophie)')" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-cyan-300 rounded-lg text-xs font-mono-num font-bold border border-slate-700 transition">1m30</button>
+                <button onclick="startTimer(120, 'Repos Long (Polyarticulaire)')" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-cyan-300 rounded-lg text-xs font-mono-num font-bold border border-slate-700 transition">2m00</button>
+                <button onclick="triggerEmergencyPause(5)" class="px-3 py-1.5 bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 rounded-lg text-xs font-bold border border-amber-500/30 transition flex items-center gap-1">
+                    <i class="fa-solid fa-mosque"></i> Pause Prière / Urgence (5m)
+                </button>
+                <button onclick="stopTimer()" class="px-3 py-1.5 bg-rose-500/20 hover:bg-rose-500/30 text-rose-400 rounded-lg text-xs font-bold border border-rose-500/30 transition">
+                    <i class="fa-solid fa-stop"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- NAVIGATION TABS -->
+        <div class="flex overflow-x-auto custom-scrollbar gap-2 pb-1">
+            <button id="tab-day1" onclick="switchTab('day1')" class="tab-btn px-4 py-2.5 rounded-xl text-xs font-black bg-cyan-600 text-white whitespace-nowrap transition flex items-center gap-1.5">
+                <i class="fa-solid fa-dumbbell"></i> Lundi • UPPER A
             </button>
-            <button onclick="switchTab('day2')" id="tab-day2" class="tab-btn px-4 py-2.5 rounded-xl font-extrabold text-xs sm:text-sm whitespace-nowrap transition-all flex items-center gap-2 bg-slate-900 text-slate-400 hover:bg-slate-800 hover:text-white">
-                <i class="fa-solid fa-calendar-day"></i> Mardi : LOWER A
+            <button id="tab-day2" onclick="switchTab('day2')" class="tab-btn px-4 py-2.5 rounded-xl text-xs font-black bg-slate-900 text-slate-400 hover:text-white whitespace-nowrap transition flex items-center gap-1.5">
+                <i class="fa-solid fa-person-running"></i> Mardi • LOWER A
             </button>
-            <button onclick="switchTab('restday')" id="tab-restday" class="tab-btn px-4 py-2.5 rounded-xl font-extrabold text-xs sm:text-sm whitespace-nowrap transition-all flex items-center gap-2 bg-slate-900 text-slate-400 hover:bg-slate-800 hover:text-white">
-                <i class="fa-solid fa-bed text-amber-400"></i> Mercredi : REPOS
+            <button id="tab-restday" onclick="switchTab('restday')" class="tab-btn px-4 py-2.5 rounded-xl text-xs font-black bg-slate-900 text-slate-400 hover:text-white whitespace-nowrap transition flex items-center gap-1.5">
+                <i class="fa-solid fa-bed"></i> Mercredi • Repos
             </button>
-            <button onclick="switchTab('day3')" id="tab-day3" class="tab-btn px-4 py-2.5 rounded-xl font-extrabold text-xs sm:text-sm whitespace-nowrap transition-all flex items-center gap-2 bg-slate-900 text-slate-400 hover:bg-slate-800 hover:text-white">
-                <i class="fa-solid fa-calendar-day"></i> Jeudi : UPPER B
+            <button id="tab-day3" onclick="switchTab('day3')" class="tab-btn px-4 py-2.5 rounded-xl text-xs font-black bg-slate-900 text-slate-400 hover:text-white whitespace-nowrap transition flex items-center gap-1.5">
+                <i class="fa-solid fa-dumbbell"></i> Jeudi • UPPER B
             </button>
-            <button onclick="switchTab('day4')" id="tab-day4" class="tab-btn px-4 py-2.5 rounded-xl font-extrabold text-xs sm:text-sm whitespace-nowrap transition-all flex items-center gap-2 bg-slate-900 text-slate-400 hover:bg-slate-800 hover:text-white">
-                <i class="fa-solid fa-calendar-day"></i> Vendredi : LOWER B
+            <button id="tab-day4" onclick="switchTab('day4')" class="tab-btn px-4 py-2.5 rounded-xl text-xs font-black bg-slate-900 text-slate-400 hover:text-white whitespace-nowrap transition flex items-center gap-1.5">
+                <i class="fa-solid fa-fire"></i> Vendredi • LOWER B
             </button>
-            <button onclick="switchTab('nutrition')" id="tab-nutrition" class="tab-btn px-4 py-2.5 rounded-xl font-extrabold text-xs sm:text-sm whitespace-nowrap transition-all flex items-center gap-2 bg-slate-900 text-slate-400 hover:bg-slate-800 hover:text-white">
-                <i class="fa-solid fa-utensils text-purple-400"></i> Nutrition & Hydratation
+            <button id="tab-nutrition" onclick="switchTab('nutrition')" class="tab-btn px-4 py-2.5 rounded-xl text-xs font-black bg-slate-900 text-slate-400 hover:text-white whitespace-nowrap transition flex items-center gap-1.5">
+                <i class="fa-solid fa-utensils"></i> Nutrition & Eau
             </button>
-            <button onclick="switchTab('tracker')" id="tab-tracker" class="tab-btn px-4 py-2.5 rounded-xl font-extrabold text-xs sm:text-sm whitespace-nowrap transition-all flex items-center gap-2 bg-slate-900 text-slate-400 hover:bg-slate-800 hover:text-white">
-                <i class="fa-solid fa-chart-line text-emerald-400"></i> Carnet de Progression
+            <button id="tab-tracker" onclick="switchTab('tracker')" class="tab-btn px-4 py-2.5 rounded-xl text-xs font-black bg-slate-900 text-slate-400 hover:text-white whitespace-nowrap transition flex items-center gap-1.5">
+                <i class="fa-solid fa-chart-line"></i> Carnet & 1RM
             </button>
         </div>
 
@@ -257,9 +339,9 @@
             <div class="bg-slate-900 p-4 rounded-2xl border border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                 <div>
                     <h2 class="text-base sm:text-lg font-black text-cyan-400 flex items-center gap-2">
-                        <span class="w-3 h-3 rounded-full bg-cyan-400 inline-block"></span> LUNDI — UPPER A (Force & Biceps/Triceps Étirement)
+                        <span class="w-3 h-3 rounded-full bg-cyan-400 inline-block"></span> LUNDI — UPPER A (Pectoraux, Dos Épaisseur & Focus Bras)
                     </h2>
-                    <p class="text-xs text-slate-400 mt-0.5">Structure : Échauffement 8m $\rightarrow$ 5 Exercices $\rightarrow$ Étirements 6m.</p>
+                    <p class="text-xs text-slate-400 mt-0.5">Focus : Développé Couché, Rowing, Épaules & Isolation Biceps Incliné / Barre au front.</p>
                 </div>
                 <button onclick="startWorkoutForDay('day1')" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-xs font-black transition flex items-center gap-2 shadow-lg shadow-emerald-600/20">
                     <i class="fa-solid fa-play"></i> Lancer la Séance Complète
@@ -273,9 +355,9 @@
             <div class="bg-slate-900 p-4 rounded-2xl border border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                 <div>
                     <h2 class="text-base sm:text-lg font-black text-cyan-400 flex items-center gap-2">
-                        <span class="w-3 h-3 rounded-full bg-cyan-400 inline-block"></span> MARDI — LOWER A (Squat, Quadriceps & Relevé Suspendu)
+                        <span class="w-3 h-3 rounded-full bg-cyan-400 inline-block"></span> MARDI — LOWER A (Quadriceps, Ischios & Abdos)
                     </h2>
-                    <p class="text-xs text-slate-400 mt-0.5">Structure : Échauffement Hanches 8m $\rightarrow$ 5 Exercices $\rightarrow$ Etirements Ischios 6m.</p>
+                    <p class="text-xs text-slate-400 mt-0.5">Focus : Back Squat, Presse à Cuisses, Leg Curl, Mollets & Relevé de Jambes.</p>
                 </div>
                 <button onclick="startWorkoutForDay('day2')" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-xs font-black transition flex items-center gap-2 shadow-lg shadow-emerald-600/20">
                     <i class="fa-solid fa-play"></i> Lancer la Séance Complète
@@ -494,18 +576,30 @@
     <!-- MODAL AI COACH ASSISTANT -->
     <div id="coach-modal" class="fixed inset-0 bg-slate-950/85 backdrop-blur-md z-50 flex items-center justify-center p-4 hidden">
         <div class="bg-slate-900 border border-purple-500/40 w-full max-w-xl rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[85vh]">
-            <div class="p-4 bg-slate-800/90 border-b border-slate-700 flex justify-between items-center">
-                <h3 class="font-extrabold text-purple-400 text-sm flex items-center gap-2">
-                    <i class="fa-solid fa-robot"></i> Assistant Coach Musculation & Nutrition IA
-                </h3>
-                <button onclick="closeCoachModal()" class="text-slate-400 hover:text-white w-7 h-7 rounded-full bg-slate-800 flex items-center justify-center">
+            <div class="p-4 bg-gradient-to-r from-slate-800 via-purple-950/60 to-slate-800 border-b border-slate-700 flex justify-between items-center">
+                <div class="flex items-center gap-3">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?auto=format&fit=crop&w=120&q=80" alt="Portrait Coach IA" class="w-11 h-11 rounded-full object-cover border-2 border-purple-400 shadow-md">
+                        <span class="absolute bottom-0 right-0 w-3 h-3 bg-emerald-400 border-2 border-slate-900 rounded-full"></span>
+                    </div>
+                    <div>
+                        <h3 class="font-extrabold text-white text-sm flex items-center gap-1.5">
+                            Coach Marcus <span class="text-[10px] bg-purple-600/40 text-purple-200 border border-purple-400/30 px-1.5 py-0.5 rounded font-bold">IA PRO</span>
+                        </h3>
+                        <span class="text-[11px] text-cyan-300 block">Expert Hypertrophie, Biomécanique & Nutrition</span>
+                    </div>
+                </div>
+                <button onclick="closeCoachModal()" class="text-slate-400 hover:text-white w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center">
                     <i class="fa-solid fa-xmark"></i>
                 </button>
             </div>
             <div id="coach-chat-history" class="p-4 overflow-y-auto custom-scrollbar space-y-3 text-xs flex-grow min-h-[220px]">
-                <div class="bg-slate-950 p-3 rounded-xl border border-slate-800 text-slate-300">
-                    <strong class="text-purple-400 block mb-1">Coach IA :</strong>
-                    Bonjour ! Je connais ton profil (1m94, 84kg, prise de masse, focus bras, séances Lun-Mar-Jeu-Ven). Pose-moi une question sur un exercice, une douleur, la nutrition ou le Ramadan/pauses prière.
+                <div class="bg-slate-950 p-3.5 rounded-xl border border-slate-800 text-slate-300 flex items-start gap-3">
+                    <img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?auto=format&fit=crop&w=100&q=80" alt="Coach" class="w-8 h-8 rounded-full object-cover border border-purple-400/50 flex-shrink-0 mt-0.5">
+                    <div>
+                        <strong class="text-purple-400 block mb-1">Coach Marcus (IA) :</strong>
+                        Salut ! Je suis ton assistant personnel. J'ai bien enregistré ton profil et tes objectifs. Pose-moi n'importe quelle question sur un mouvement, une douleur ou ta nutrition : je te répondrai avec des <strong>tutoriels détaillés étape par étape</strong> !
+                    </div>
                 </div>
             </div>
             <div class="p-3 bg-slate-950 border-t border-slate-800 flex gap-2">
@@ -579,8 +673,13 @@
                     <textarea id="prof-health" rows="2" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-white" placeholder="Ex: Antécédents genou gauche, utiliser sangles poignets si besoin..."></textarea>
                 </div>
             </div>
-            <div class="p-4 bg-slate-800/60 border-t border-slate-700 flex justify-between items-center">
-                <span class="text-[11px] text-slate-400">Sauvegarde locale active</span>
+            <div class="p-4 bg-slate-800/60 border-t border-slate-700 flex flex-wrap justify-between items-center gap-2">
+                <button onclick="resetUserSession()" class="px-3 py-2 bg-rose-500/15 hover:bg-rose-500/25 text-rose-400 border border-rose-500/30 font-bold rounded-xl text-xs transition flex items-center gap-1.5">
+                    <i class="fa-solid fa-right-from-bracket"></i> Changer d'utilisateur / Effacer mes infos
+
+                <button onclick="resetUserSession()" class="px-3 py-2 bg-rose-500/15 hover:bg-rose-500/25 text-rose-400 border border-rose-500/30 font-bold rounded-xl text-xs transition flex items-center gap-1.5">
+                    <i class="fa-solid fa-right-from-bracket"></i> Changer d'utilisateur / Effacer mes infos
+                </button>
                 <button onclick="saveUserProfile()" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl text-xs transition">Enregistrer le Profil</button>
             </div>
         </div>
@@ -612,89 +711,146 @@
                     <ul id="modal-instructions" class="space-y-2 text-xs text-slate-300 list-disc list-inside bg-slate-950 p-3.5 rounded-xl border border-slate-800"></ul>
                 </div>
 
-                <div id="modal-tip-box" class="p-3.5 bg-amber-500/10 border border-amber-500/20 rounded-xl text-xs text-amber-300 flex items-start gap-2.5">
-                    <i class="fa-solid fa-lightbulb text-amber-400 text-sm mt-0.5"></i>
-                    <span id="modal-tip"></span>
+                <div class="bg-amber-950/30 border border-amber-500/30 p-3 rounded-xl text-xs text-amber-200 flex items-start gap-2">
+                    <i class="fa-solid fa-lightbulb text-amber-400 mt-0.5"></i>
+                    <div>
+                        <strong class="block text-amber-300">Conseil Biomécanique :</strong>
+                        <span id="modal-tip"></span>
+                    </div>
                 </div>
-            </div>
-            <div class="p-4 bg-slate-800/60 border-t border-slate-700 text-right">
-                <button onclick="closeModal()" class="px-4 py-2 bg-cyan-600 hover:bg-cyan-500 text-white font-bold rounded-xl text-xs transition">Fermer</button>
             </div>
         </div>
     </div>
 
-    <!-- MODAL LIVE WORKOUT READER & PAUSE SYSTEM -->
-    <div id="live-workout-modal" class="fixed inset-0 bg-slate-950/90 backdrop-blur-md z-50 flex items-center justify-center p-3 sm:p-4 hidden">
-        <div class="bg-slate-900 border border-slate-700 w-full max-w-3xl rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[92vh]">
-            <div class="p-4 bg-slate-800/80 border-b border-slate-700 flex justify-between items-center">
+    <!-- MODAL LIVE WORKOUT TRACKER -->
+    <div id="live-workout-modal" class="fixed inset-0 bg-slate-950/90 backdrop-blur-md z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-slate-900 border border-emerald-500/40 w-full max-w-2xl rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
+            <div class="p-4 bg-slate-800/90 border-b border-slate-700 flex justify-between items-center">
                 <div>
-                    <span class="text-[10px] uppercase font-bold text-emerald-400 tracking-wider">Mode Séance Interactive</span>
-                    <h3 id="live-workout-title" class="font-extrabold text-white text-base">Séance du Jour</h3>
-                </div>
-                <button onclick="toggleLiveWorkoutModal()" class="text-slate-400 hover:text-white w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center">
-                    <i class="fa-solid fa-xmark"></i>
-                </button>
-            </div>
-
-            <div class="p-4 sm:p-6 overflow-y-auto custom-scrollbar space-y-5">
-                <!-- Pause/Prière Adapter Banner -->
-                <div class="bg-amber-500/10 border border-amber-500/30 p-3 rounded-xl flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
-                    <div class="flex items-center gap-2 text-amber-300">
-                        <i class="fa-solid fa-person-praying text-lg"></i>
-                        <div>
-                            <span class="font-bold block">Pause Imprévue / Prière / Urgence</span>
-                            <span class="text-[11px] text-slate-400">Ajuste automatiquement les temps de repos restants.</span>
+                    <h3 id="live-workout-title" class="font-black text-emerald-400 text-base">Séance en Direct</h3>
+                    <div class="flex items-center gap-2 mt-1">
+                        <div class="w-32 bg-slate-950 h-2 rounded-full overflow-hidden border border-slate-700">
+                            <div id="live-progress-bar" class="bg-emerald-500 h-2 transition-all duration-300" style="width: 0%"></div>
                         </div>
-                    </div>
-                    <div class="flex items-center gap-1.5">
-                        <button onclick="triggerEmergencyPause(5)" class="px-2.5 py-1 bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 rounded-lg font-bold border border-amber-500/30 transition">+5 min</button>
-                        <button onclick="triggerEmergencyPause(10)" class="px-2.5 py-1 bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 rounded-lg font-bold border border-amber-500/30 transition">+10 min</button>
-                        <button onclick="triggerEmergencyPause(15)" class="px-2.5 py-1 bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 rounded-lg font-bold border border-amber-500/30 transition">+15 min</button>
+                        <span id="live-progress-text" class="text-[11px] font-mono-num font-bold text-slate-300">0%</span>
                     </div>
                 </div>
-
-                <!-- Session Progress Bar -->
-                <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-2">
-                    <div class="flex justify-between items-center text-xs font-bold">
-                        <span class="text-slate-400">Progression globale de la séance</span>
-                        <span id="live-progress-text" class="text-emerald-400">0%</span>
-                    </div>
-                    <div class="w-full bg-slate-800 rounded-full h-2.5 overflow-hidden">
-                        <div id="live-progress-bar" class="bg-emerald-500 h-2.5 rounded-full transition-all duration-300" style="width: 0%"></div>
-                    </div>
+                <div class="flex items-center gap-2">
+                    <button onclick="triggerEmergencyPause(5)" class="px-2.5 py-1.5 bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 rounded-lg text-xs font-bold border border-amber-500/30 transition">
+                        <i class="fa-solid fa-pause"></i> Pause 5m
+                    </button>
+                    <button onclick="toggleLiveWorkoutModal()" class="text-slate-400 hover:text-white w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
                 </div>
-
-                <!-- Live Exercises List -->
-                <div id="live-exercises-container" class="space-y-4"></div>
             </div>
-
+            <div id="live-exercises-container" class="p-4 overflow-y-auto custom-scrollbar space-y-3 flex-grow"></div>
             <div class="p-4 bg-slate-800/80 border-t border-slate-700 flex justify-between items-center">
-                <span class="text-xs text-slate-400">Enregistrement automatique</span>
-                <button onclick="finishLiveWorkout()" class="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl text-xs transition shadow-lg shadow-emerald-600/20">
-                    <i class="fa-solid fa-circle-check mr-1.5"></i> Valider la Séance
+                <button onclick="toggleLiveWorkoutModal()" class="px-4 py-2 bg-slate-800 text-slate-300 font-bold rounded-xl text-xs">Fermer</button>
+                <button onclick="finishLiveWorkout()" class="px-5 py-2 bg-emerald-600 hover:bg-emerald-500 text-white font-black rounded-xl text-xs shadow-lg shadow-emerald-600/20">
+                    <i class="fa-solid fa-flag-checkered mr-1"></i> Terminer & Valider la Séance
                 </button>
             </div>
         </div>
     </div>
 
-    <!-- LOGIC SCRIPT -->
     <script>
-        // Sound Alert System
+        // DEFAULT NEUTRAL PROFILE (AUCUNE DONNÉE PERSONNELLE EXPOSÉE PAR DÉFAUT)
+        let userProfile = {
+            isConfigured: false,
+            name: "",
+            sex: "Masculin",
+            age: 28,
+            height: 178,
+            weight: 75,
+            goal: "bulk",
+            job: "",
+            schedule: "Séances Lun-Mar-Jeu-Ven (1h max). Pauses prière/urgence intégrées.",
+            health: "Aucune contrainte particulière signalée.",
+            bmr: 1750,
+            tdee: 2850,
+            prot: 150,
+            carbs: 375,
+            fat: 82
+        };
+
+        let currentWater = 0.0;
+        let activeDayKey = "day1";
+        let trackerLogs = [];
+
+        // INIT APP ON LOAD
+        window.onload = function() {
+            const hasProfile = loadLocalStorage();
+            if (!hasProfile || !userProfile.isConfigured) {
+                document.getElementById('onboarding-overlay').classList.remove('hidden');
+            } else {
+                document.getElementById('onboarding-overlay').classList.add('hidden');
+                renderProfileToHeader();
+            }
+            renderDaysExercises();
+            renderMealTimeline();
+            renderTrackerTable();
+            calculate1RM();
+        };
+
+        function submitOnboardingProfile(e) {
+            e.preventDefault();
+            const name = document.getElementById('onb-name').value.trim();
+            const sex = document.getElementById('onb-sex').value;
+            const age = parseFloat(document.getElementById('onb-age').value) || 28;
+            const height = parseFloat(document.getElementById('onb-height').value) || 178;
+            const weight = parseFloat(document.getElementById('onb-weight').value) || 75;
+            const goal = document.getElementById('onb-goal').value;
+            const health = document.getElementById('onb-health').value.trim() || "Aucune contrainte particulière.";
+
+            // Calcul métabolique personnalisé selon l'objectif
+            let bmr = (10 * weight) + (6.25 * height) - (5 * age) + (sex === "Masculin" ? 5 : -161);
+            let surplus = goal === "bulk" ? 300 : (goal === "cut" ? -350 : 0);
+            let tdee = Math.round(bmr * 1.55) + surplus;
+            let prot = Math.round(weight * 2.0);
+            let fat = Math.round(weight * 1.05);
+            let carbs = Math.max(80, Math.round((tdee - (prot * 4) - (fat * 9)) / 4));
+
+            userProfile = {
+                ...userProfile,
+                isConfigured: true,
+                name,
+                sex,
+                age,
+                height,
+                weight,
+                goal,
+                health,
+                bmr: Math.round(bmr),
+                tdee,
+                prot,
+                carbs,
+                fat
+            };
+
+            localStorage.setItem('massbuilder_profile', JSON.stringify(userProfile));
+            document.getElementById('onboarding-overlay').classList.add('hidden');
+            renderProfileToHeader();
+            showToast(`Bienvenue ${name} ! Votre programme est calibré sur ${tdee} Kcal/jour.`, "success");
+        }
+
+        function resetUserSession() {
+            localStorage.removeItem('massbuilder_profile');
+            localStorage.removeItem('massbuilder_water');
+            localStorage.removeItem('massbuilder_logs');
+            location.reload();
+        }
+
         function playBeep() {
             try {
-                const ctx = new (window.AudioContext || window.webkitAudioContext)();
-                const osc = ctx.createOscillator();
-                const gain = ctx.createGain();
+                const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                const osc = audioCtx.createOscillator();
                 osc.type = 'sine';
-                osc.frequency.setValueAtTime(880, ctx.currentTime);
-                gain.gain.setValueAtTime(0.4, ctx.currentTime);
-                osc.connect(gain);
-                gain.connect(ctx.destination);
+                osc.frequency.setValueAtTime(880, audioCtx.currentTime);
+                osc.connect(audioCtx.destination);
                 osc.start();
-                osc.stop(ctx.currentTime + 0.6);
-            } catch (e) {
-                console.log("Audio non disponible");
-            }
+                osc.stop(audioCtx.currentTime + 0.25);
+            } catch (e) {}
         }
 
         // Timer Logic
@@ -1139,37 +1295,6 @@
                 setTimeout(() => toast.remove(), 300);
             }, 3500);
         }
-
-        // DEFAULT USER PROFILE & HYDRATION & LOGS
-        let userProfile = {
-            name: "Athlète",
-            sex: "Masculin",
-            age: 30,
-            height: 194,
-            weight: 84,
-            job: "Actif / Salle Musculation",
-            schedule: "Séances Lun-Mar-Jeu-Ven 1h max. Pause prière/urgence intégrée.",
-            health: "Antécédents genou gauche, bas du dos et poignet gauche. Exercices optimisés.",
-            bmr: 1920,
-            tdee: 3120,
-            prot: 165,
-            carbs: 410,
-            fat: 90
-        };
-
-        let currentWater = 0.0;
-        let activeDayKey = "day1";
-        let trackerLogs = [];
-
-        // INIT APP ON LOAD
-        window.onload = function() {
-            loadLocalStorage();
-            renderProfileToHeader();
-            renderDaysExercises();
-            renderMealTimeline();
-            renderTrackerTable();
-            calculate1RM();
-        };
 
         function switchTab(tabId) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
@@ -1766,8 +1891,15 @@
         // LOCAL STORAGE ENGINE
         function loadLocalStorage() {
             const savedProf = localStorage.getItem('massbuilder_profile');
+            let found = false;
             if(savedProf) {
-                try { userProfile = JSON.parse(savedProf); } catch(e){}
+                try { 
+                    const parsed = JSON.parse(savedProf);
+                    if (parsed && parsed.isConfigured && parsed.name) {
+                        userProfile = parsed;
+                        found = true;
+                    }
+                } catch(e){}
             }
 
             const savedWater = localStorage.getItem('massbuilder_water');
@@ -1780,6 +1912,7 @@
             if(savedLogs) {
                 try { trackerLogs = JSON.parse(savedLogs); } catch(e){}
             }
+            return found;
         }
     </script>
 </body>
