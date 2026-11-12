@@ -10,7 +10,62 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="Mass Builder 4D">
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cdefs%3E%3ClinearGradient id='bg' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%230f172a'/%3E%3Cstop offset='100%25' stop-color='%23020617'/%3E%3C/linearGradient%3E%3ClinearGradient id='neon' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%2306b6d4'/%3E%3Cstop offset='100%25' stop-color='%23a855f7'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='512' height='512' rx='112' fill='url(%23bg)'/%3E%3Crect x='16' y='16' width='480' height='480' rx='96' fill='none' stroke='url(%23neon)' stroke-width='16'/%3E%3Cg fill='url(%23neon)'%3E%3Crect x='96' y='176' width='44' height='160' rx='14'/%3E%3Crect x='152' y='144' width='48' height='224' rx='16'/%3E%3Crect x='212' y='236' width='88' height='40' rx='8'/%3E%3Crect x='312' y='144' width='48' height='224' rx='16'/%3E%3Crect x='372' y='176' width='44' height='160' rx='14'/%3E%3C/g%3E%3Cpath d='M276 92 L224 256 L268 256 L236 420 L316 236 L268 236 Z' fill='%23ffffff' opacity='0.92'/%3E%3C/svg%3E">
-    <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cdefs%3E%3ClinearGradient id='bg' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%230f172a'/%3E%3Cstop offset='100%25' stop-color='%23020617'/%3E%3C/linearGradient%3E%3ClinearGradient id='neon' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%2306b6d4'/%3E%3Cstop offset='100%25' stop-color='%23a855f7'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='512' height='512' fill='url(%23bg)'/%3E%3Cg fill='url(%23neon)'%3E%3Crect x='96' y='176' width='44' height='160' rx='14'/%3E%3Crect x='152' y='144' width='48' height='224' rx='16'/%3E%3Crect x='212' y='236' width='88' height='40' rx='8'/%3E%3Crect x='312' y='144' width='48' height='224' rx='16'/%3E%3Crect x='372' y='176' width='44' height='160' rx='14'/%3E%3C/g%3E%3Cpath d='M276 92 L224 256 L268 256 L236 420 L316 236 L268 236 Z' fill='%23ffffff' opacity='0.92'/%3E%3C/svg%3E">
+    <link id="apple-touch-icon-link" rel="apple-touch-icon" sizes="512x512" href="">
+    <script>
+        // Génération automatique d'une vraie icône PNG 512x512 compatible iOS Safari
+        (function() {
+            const canvas = document.createElement('canvas');
+            canvas.width = 512;
+            canvas.height = 512;
+            const ctx = canvas.getContext('2d');
+
+            // Fond dégradé sombre
+            const bgGrad = ctx.createLinearGradient(0, 0, 512, 512);
+            bgGrad.addColorStop(0, '#0f172a');
+            bgGrad.addColorStop(1, '#020617');
+            ctx.fillStyle = bgGrad;
+            ctx.fillRect(0, 0, 512, 512);
+
+            // Dégradé néon Cyan -> Violet
+            const neonGrad = ctx.createLinearGradient(0, 0, 512, 512);
+            neonGrad.addColorStop(0, '#06b6d4');
+            neonGrad.addColorStop(1, '#a855f7');
+
+            // Bordure néon subtile
+            ctx.strokeStyle = neonGrad;
+            ctx.lineWidth = 18;
+            ctx.strokeRect(20, 20, 472, 472);
+
+            // Dessin de l'haltère
+            ctx.fillStyle = neonGrad;
+            function roundRect(x, y, w, h, r) {
+                ctx.beginPath();
+                ctx.roundRect(x, y, w, h, r);
+                ctx.fill();
+            }
+            roundRect(76, 176, 44, 160, 14);
+            roundRect(132, 144, 48, 224, 16);
+            roundRect(192, 236, 128, 40, 8);
+            roundRect(332, 144, 48, 224, 16);
+            roundRect(392, 176, 44, 160, 14);
+
+            // Éclair central blanc
+            ctx.fillStyle = '#ffffff';
+            ctx.beginPath();
+            ctx.moveTo(276, 84);
+            ctx.lineTo(218, 256);
+            ctx.lineTo(266, 256);
+            ctx.lineTo(232, 428);
+            ctx.lineTo(322, 236);
+            ctx.lineTo(270, 236);
+            ctx.closePath();
+            ctx.fill();
+
+            const pngDataUrl = canvas.toDataURL('image/png');
+            const appleLink = document.getElementById('apple-touch-icon-link');
+            if (appleLink) appleLink.href = pngDataUrl;
+        })();
+    </script>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
